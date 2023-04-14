@@ -98,7 +98,7 @@ function App() {
 
 const styles = StyleSheet.create({
     text: {
-        fontFamily: 'Poppins',
+        // fontFamily: 'Poppins',
         fontSize: 24,
         color: '#ffffff',
     },

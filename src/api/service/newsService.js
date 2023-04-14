@@ -17,3 +17,15 @@ export const fetchNews = async (category, country) => {
         return [];
     }
 };
+export const fetchSpecificArticle = async (article) => {
+    const url = `https://newsapi.org/v2/top-headlines?q=${article.title}&apiKey=${API_KEY}`
+
+    try {
+        const response = await axios.get(url);
+        return response.data.articles[0];
+    } catch (error) {
+        console.error('Error fetching news:', error);
+        return [];
+    }
+
+}
