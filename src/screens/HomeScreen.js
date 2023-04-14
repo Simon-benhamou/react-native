@@ -36,10 +36,10 @@ const HomeScreen = ({ navigation }) => {
 
     if (error) {
         return (
-            <View>
-                <CustomHeader title="AI-Powered News" />
+            <LogoContainer>
+                <Loading />
                 <Text>Error: {error}</Text>
-            </View>
+            </LogoContainer>
         );
     }
 

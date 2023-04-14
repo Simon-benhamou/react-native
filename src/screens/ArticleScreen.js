@@ -8,11 +8,12 @@ import styled from 'styled-components/native';
 // Import the logo
 import newsAiLogo from '../../assets/new_logo.png';
 import Loading from '../components/Loading/Loading.js';
-import { fetchArticle } from '../redux/actions/newActions.js';
+import { fetchArticle, reset } from '../redux/actions/newActions.js';
 
 const ArticleScreen = ({ route }) => {
     const { article } = route.params;
-    const currentArticle = article || useSelector((state) => state.news.current);
+    const currentArticle = article
+    // || useSelector((state) => state.news.current);
     const loading = useSelector((state) => state.news.loading);
     const error = useSelector((state) => state.news.error);
     const dispatch = useDispatch();
@@ -22,14 +23,16 @@ const ArticleScreen = ({ route }) => {
     useEffect(() => {
         dispatch(fetchArticle(article));
         dispatch(addToHistory(article));
-
+        return () => {
+          dispatch(reset())
+        } 
     }, [dispatch]);
 
 
-    if (loading) {
-        return <Loading />
+    // if (loading) {
+    //     return <Loading />
 
-    }
+    // }
 
     const paragraphs = currentArticle.content?.split('\n');
 
@@ -40,8 +43,8 @@ const ArticleScreen = ({ route }) => {
                 <LogoContainer>
                     <Logo source={newsAiLogo} />
                 </LogoContainer>
-                <Title>{currentArticle.title}</Title>
-                <ArticleImage source={{ uri: currentArticle.urlToImage }} />
+                <Title>{currentArticle?.title}</Title>
+                <ArticleImage source={{ uri: currentArticle?.urlToImage }} />
                 {paragraphs?.map((paragraph, index) => (
                     <Content key={index}>{paragraph}</Content>
                 ))}

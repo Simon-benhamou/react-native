@@ -4,8 +4,8 @@ export const FETCH_ARTICLES_SUCCESS = 'FETCH_ARTICLES_SUCCESS';
 export const FETCH_ARTICLES_FAILURE = 'FETCH_ARTICLES_FAILURE';
 export const FETCH_ARTICLE_START = 'FETCH_ARTICLES_START';
 export const FETCH_ARTICLE_SUCCESS = 'FETCH_ARTICLES_SUCCESS';
-export const FETCH_ARTICLE=_FAILURE = 'FETCH_ARTICLES_FAILURE';
-
+export const FETCH_ARTICLE_FAILURE = 'FETCH_ARTICLES_FAILURE';
+export const RESET_ARTICLE = 'RESET_ARTICLE'
 export const fetchArticlesRequest = () => ({
     type: FETCH_ARTICLES_START
 });
@@ -33,7 +33,9 @@ export const fetchArticlesFailure = (error) => ({
     type: FETCH_ARTICLES_FAILURE,
     payload: error
 });
-
+export const reset = () => ({
+    type: RESET_ARTICLE
+})
 export const fetchArticles = (category,country) => {
     return async (dispatch) => {
         dispatch(fetchArticlesRequest());

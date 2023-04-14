@@ -1,7 +1,7 @@
 import {
     FETCH_ARTICLES_START, FETCH_ARTICLES_SUCCESS,
     FETCH_ARTICLES_FAILURE, FETCH_ARTICLE_START, FETCH_ARTICLE_SUCCESS,
-    FETCH_ARTICLE_FAILURE
+    FETCH_ARTICLE_FAILURE, RESET_ARTICLE
 } from '../actions/newActions';
 
 const initialState = {
@@ -31,6 +31,9 @@ const newsReducer = (state = initialState, action) => {
 
         case FETCH_ARTICLE_FAILURE:
             return { ...state, loading: false, error: action.payload };
+        case RESET_ARTICLE: 
+            return { ...state, loading: false, current: {}, error: null };
+
         default:
             return state;
     }

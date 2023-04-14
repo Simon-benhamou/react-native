@@ -4,8 +4,8 @@ import { View, Text, Image, StyleSheet } from 'react-native';
 const ArticleCard = ({ article }) => {
     return (
         <View style={styles.card}>
-            <Image source={{ uri: article.urlToImage }} style={styles.image} />
-            <Text style={styles.title}>{article.title}</Text>
+            <Image source={{ uri: article?.urlToImage }} style={styles.image} />
+            <Text style={styles.title}>{article?.title}</Text>
         </View>
     );
 };
