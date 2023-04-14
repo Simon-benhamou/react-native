@@ -22,6 +22,7 @@ export const fetchSpecificArticle = async (article) => {
 
     try {
         const response = await axios.get(url);
+        console.log(response)
         return response.data.articles[0];
     } catch (error) {
         console.error('Error fetching news:', error);

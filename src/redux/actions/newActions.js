@@ -6,6 +6,8 @@ export const FETCH_ARTICLE_START = 'FETCH_ARTICLES_START';
 export const FETCH_ARTICLE_SUCCESS = 'FETCH_ARTICLES_SUCCESS';
 export const FETCH_ARTICLE_FAILURE = 'FETCH_ARTICLES_FAILURE';
 export const RESET_ARTICLE = 'RESET_ARTICLE'
+
+// get all 
 export const fetchArticlesRequest = () => ({
     type: FETCH_ARTICLES_START
 });
@@ -15,6 +17,26 @@ export const fetchArticlesSuccess = (articles) => ({
     payload: articles
 });
 
+
+export const fetchArticlesFailure = (error) => ({
+    type: FETCH_ARTICLES_FAILURE,
+    payload: error
+});
+export const reset = () => ({
+    type: RESET_ARTICLE
+})
+export const fetchArticles = (category, country) => {
+    return async (dispatch) => {
+        dispatch(fetchArticlesRequest());
+        try {
+            const articles = await fetchNews(category, country);
+            dispatch(fetchArticlesSuccess(articles));
+        } catch (error) {
+            dispatch(fetchArticlesFailure(error.message));
+        }
+    };
+};
+// get one 
 export const fetchArticleFailure = (error) => ({
     type: FETCH_ARTICLE_FAILURE,
     payload: error
@@ -24,38 +46,19 @@ export const fetchArticleRequest = () => ({
     type: FETCH_ARTICLE_START
 });
 
-export const fetchArticleSuccess = (articles) => ({
+export const fetchArticleSuccess = (article) => ({
     type: FETCH_ARTICLE_SUCCESS,
-    payload: articles
+    payload: article
 });
 
-export const fetchArticlesFailure = (error) => ({
-    type: FETCH_ARTICLES_FAILURE,
-    payload: error
-});
-export const reset = () => ({
-    type: RESET_ARTICLE
-})
-export const fetchArticles = (category,country) => {
-    return async (dispatch) => {
-        dispatch(fetchArticlesRequest());
-        try {
-            const articles = await fetchNews(category,country);
-            dispatch(fetchArticlesSuccess(articles));
-        } catch (error) {
-            dispatch(fetchArticlesFailure(error.message));
-        }
-    };
-};
-export const fetchArticle = (article) => {
+export const fetchArticle = (MainArticleData) => {
     return async (dispatch) => {
         dispatch(fetchArticleRequest());
         try {
-            const article = await fetchSpecificArticle(article);
+            const article = await fetchSpecificArticle(MainArticleData);
             dispatch(fetchArticleSuccess(article));
         } catch (error) {
             dispatch(fetchArticleFailure(error.message));
         }
     };
 };
-fetchSpecificArticle

@@ -8,7 +8,7 @@ const initialState = {
     articles: [],
     loading: false,
     error: null,
-    region: 'us',
+    region: 'fr',
     category:'technology',
     current:{}
 };
@@ -27,6 +27,7 @@ const newsReducer = (state = initialState, action) => {
             return { ...state, loading: true, error: null };
 
         case FETCH_ARTICLE_SUCCESS:
+            console.log(action)
             return { ...state, loading: false, current: action.payload };
 
         case FETCH_ARTICLE_FAILURE:

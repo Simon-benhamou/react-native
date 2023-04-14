@@ -12,14 +12,13 @@ import { fetchArticle, reset } from '../redux/actions/newActions.js';
 
 const ArticleScreen = ({ route }) => {
     const { article } = route.params;
-    const currentArticle = article
-    // || useSelector((state) => state.news.current);
+  const currentArticle = article 
+  const ar =  useSelector((state) => state.news.current);
     const loading = useSelector((state) => state.news.loading);
     const error = useSelector((state) => state.news.error);
     const dispatch = useDispatch();
 
     // Call this function when an article is opened
-    console.log(currentArticle)
     useEffect(() => {
         dispatch(fetchArticle(article));
         dispatch(addToHistory(article));
@@ -29,10 +28,10 @@ const ArticleScreen = ({ route }) => {
     }, [dispatch]);
 
 
-    // if (loading) {
-    //     return <Loading />
+    if (loading) {
+        return <Loading />
 
-    // }
+    }
 
     const paragraphs = currentArticle.content?.split('\n');
 
