@@ -1,4 +1,4 @@
-import { fetchNewsArticles } from '../../api/newsApi';
+import { fetchNews } from '../../api/service/newsService';
 export const FETCH_ARTICLES_START = 'FETCH_ARTICLES_START';
 export const FETCH_ARTICLES_SUCCESS = 'FETCH_ARTICLES_SUCCESS';
 export const FETCH_ARTICLES_FAILURE = 'FETCH_ARTICLES_FAILURE';
@@ -17,11 +17,11 @@ export const fetchArticlesFailure = (error) => ({
     payload: error
 });
 
-export const fetchArticles = () => {
+export const fetchArticles = (category,country) => {
     return async (dispatch) => {
         dispatch(fetchArticlesRequest());
         try {
-            const articles = await fetchNewsArticles();
+            const articles = await fetchNews(category,country);
             dispatch(fetchArticlesSuccess(articles));
         } catch (error) {
             dispatch(fetchArticlesFailure(error.message));
