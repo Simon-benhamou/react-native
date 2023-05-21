@@ -36,29 +36,3 @@ export const fetchArticles = (category, country) => {
         }
     };
 };
-// get one 
-export const fetchArticleFailure = (error) => ({
-    type: FETCH_ARTICLE_FAILURE,
-    payload: error
-});
-
-export const fetchArticleRequest = () => ({
-    type: FETCH_ARTICLE_START
-});
-
-export const fetchArticleSuccess = (article) => ({
-    type: FETCH_ARTICLE_SUCCESS,
-    payload: article
-});
-
-export const fetchArticle = (MainArticleData) => {
-    return async (dispatch) => {
-        dispatch(fetchArticleRequest());
-        try {
-            const article = await fetchSpecificArticle(MainArticleData);
-            dispatch(fetchArticleSuccess(article));
-        } catch (error) {
-            dispatch(fetchArticleFailure(error.message));
-        }
-    };
-};

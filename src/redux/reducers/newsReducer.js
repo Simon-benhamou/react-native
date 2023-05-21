@@ -1,16 +1,14 @@
 import {
     FETCH_ARTICLES_START, FETCH_ARTICLES_SUCCESS,
-    FETCH_ARTICLES_FAILURE, FETCH_ARTICLE_START, FETCH_ARTICLE_SUCCESS,
-    FETCH_ARTICLE_FAILURE, RESET_ARTICLE
+    FETCH_ARTICLES_FAILURE, RESET_ARTICLE
 } from '../actions/newActions';
 
 const initialState = {
     articles: [],
     loading: false,
     error: null,
-    region: 'fr',
-    category:'technology',
-    current:{}
+    region: 'us',
+    category:'',
 };
 
 const newsReducer = (state = initialState, action) => {
@@ -23,18 +21,8 @@ const newsReducer = (state = initialState, action) => {
 
         case FETCH_ARTICLES_FAILURE:
             return { ...state, loading: false, error: action.payload };
-        case FETCH_ARTICLE_START:
-            return { ...state, loading: true, error: null };
-
-        case FETCH_ARTICLE_SUCCESS:
-            console.log(action)
-            return { ...state, loading: false, current: action.payload };
-
-        case FETCH_ARTICLE_FAILURE:
-            return { ...state, loading: false, error: action.payload };
-        case RESET_ARTICLE: 
-            return { ...state, loading: false, current: {}, error: null };
-
+        case RESET_ARTICLE:
+            return initialState
         default:
             return state;
     }
